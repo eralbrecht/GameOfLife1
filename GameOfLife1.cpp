@@ -9,8 +9,25 @@
 #include "Mirror.h"
 //include other game modes
 using namespace std;
-char** worldGeneration(char inputChoice, char outputMode, ofstream outputfile, int columns, int rows)
+void printer(char text, int header)
 {
+	ofstream outputFile;
+	outputFile.open("rosealbrechtoutput.txt", ios::out | ios::app);
+	if (header == 0)
+	{
+
+		outputfile << "RoseAlbrecht 2300456" << endl;
+		outputfile << "Game Of Life" << endl;
+		outputfile << "Starting Game Board" << endl;
+		header = -1;
+	}
+
+}
+char** worldGeneration(char inputChoice, char outputMode, int columns, int rows)
+{
+	//ofstream outputFile;
+	//char** printFile = tellp(outputFile)
+	
 	if (inputChoice == 'y')
 	{
 		cout << " - 39 -";
@@ -82,7 +99,7 @@ char** worldGeneration(char inputChoice, char outputMode, ofstream outputfile, i
 				}
 				if (outputMode == 't');
 				{
-					outputfile << world[w][h];
+					printer(newWorld[w][h], header);
 				}
 
 			}
@@ -92,7 +109,7 @@ char** worldGeneration(char inputChoice, char outputMode, ofstream outputfile, i
 			}
 			if (outputMode == 't');
 			{
-				outputfile << endl;
+				printer('endl', header);
 			}
 
 		}
@@ -136,7 +153,7 @@ char** worldGeneration(char inputChoice, char outputMode, ofstream outputfile, i
 				}
 				if (outputMode == 't');
 				{
-					outputfile << world[w][h];
+					printer(newWorld[w][h], header);
 				}
 			}
 			if (outputMode == 'c');
@@ -145,7 +162,7 @@ char** worldGeneration(char inputChoice, char outputMode, ofstream outputfile, i
 			}
 			if (outputMode == 't');
 			{
-				outputfile << endl;
+				printer('endl', header);
 			}
 		}
 		return (char**)world;
@@ -157,6 +174,7 @@ int main()
 	int rows = 0;
 	int repeat;
 	int generation = 1;
+	int header = 0;
 
 	//add in game type options
 	cout << "what game version would you like to play?" << endl;
@@ -167,16 +185,6 @@ int main()
 	cout << "would you like to print to console or a text file enter c or t?" << endl;
 	char outputMode;
 	cin >> outputMode;
-	//initiate the file for if we decide we want to print to it
-	ofstream outputFile;
-	char** printFile = tellp(outputFile)
-	outputFile.open("rosealbrechtoutput.txt", ios::out | ios::app);
-	if (outputMode == 't')
-	{
-		outputfile << "RoseAlbrecht 2300456" << endl;
-		outputfile << "Game Of Life" << endl;
-		outputfile << "Starting Game Board" << endl;
-	}
 	cout << "would you like to provide a map file" << endl;
 	cout << "for a map of the world in which the" << endl;
 	cout << "simulation would occur? y or n" << endl;
@@ -184,7 +192,7 @@ int main()
 	cin >> inputChoice;
 	char** newWorld[columns][rows];
 	char** archiveWorld[columns][rows];
-	char** world = worldGeneration(inputChoice, outputMode, outputfile, columns, rows);
+	char** world = worldGeneration(inputChoice, outputMode, columns, rows);
 	if (gameMode == 'c')
 	{
 		Classic classicGame = Classic();
@@ -209,7 +217,7 @@ int main()
 					}
 					if (outputMode == 't');
 					{
-						outputfile << newWorld[w][h];
+						printer(newWorld[w][h], header);
 					}
 				}
 				if (outputMode == 'c');
@@ -218,7 +226,7 @@ int main()
 				}
 				if (outputMode == 't');
 				{
-					outputfile << endl;
+					printer('endl', header);
 				}
 			}
 			//shift worlds
@@ -260,7 +268,7 @@ int main()
 					}
 					if (outputMode == 't');
 					{
-						outputfile << newWorld[w][h];
+						printer(newWorld[w][h], header);
 					}
 				}
 				if (outputMode == 'c');
@@ -269,7 +277,7 @@ int main()
 				}
 				if (outputMode == 't');
 				{
-					outputfile << endl;
+					printer('endl', header);
 				}
 			}
 			//shift worlds
@@ -311,7 +319,7 @@ int main()
 					}
 					if (outputMode == 't');
 					{
-						outputfile << newWorld[w][h];
+						printer(newWorld[w][h], header);
 					}
 				}
 				if (outputMode == 'c');
@@ -320,7 +328,7 @@ int main()
 				}
 				if (outputMode == 't');
 				{
-					outputfile << endl;
+					printer('endl', header);
 				}
 			}
 			//shift worlds
