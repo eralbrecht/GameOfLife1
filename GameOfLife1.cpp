@@ -60,8 +60,6 @@ char** worldGeneration(char inputChoice, char outputMode, ofstream outputfile, i
 		}
 		//initialize all worlds to the size of the simulation space
 		char world[columns][rows];
-		//char newWorld[columns][rows];
-		char archiveWorld[columns][rows];
 		int tempPosition = 0;
 		lineCount = 0;
 		int columnCount;
@@ -170,8 +168,9 @@ int main()
 	char outputMode;
 	cin >> outputMode;
 	//initiate the file for if we decide we want to print to it
-	ofstream outputfile;
-	outputfile.open("rosealbrechtoutput.txt", ios::out | ios::app);
+	ofstream outputFile;
+	char** printFile = tellp(outputFile)
+	outputFile.open("rosealbrechtoutput.txt", ios::out | ios::app);
 	if (outputMode == 't')
 	{
 		outputfile << "RoseAlbrecht 2300456" << endl;
@@ -183,6 +182,8 @@ int main()
 	cout << "simulation would occur? y or n" << endl;
 	char inputChoice;
 	cin >> inputChoice;
+	char** newWorld[columns][rows];
+	char** archiveWorld[columns][rows];
 	char** world = worldGeneration(inputChoice, outputMode, outputfile, columns, rows);
 	if (gameMode == 'c')
 	{
@@ -221,7 +222,7 @@ int main()
 				}
 			}
 			//shift worlds
-			if ((char**)newWorld == world || (char**)newWorld == archiveWorld)
+			if ((char**)newWorld == world || (char**)newWorld == (char**)archiveWorld)
 			{ 
 				repeat += 1;
 			}
