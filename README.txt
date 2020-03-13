@@ -1,5 +1,8 @@
 README
 Rose Albrecht 2300456 ealbrecht@chapman.edu GameOfLife
+DOES NOT COMPILE
+I cannot get variables to pass between cpp files, there is an attempt at using pointers 
+but as we have not learned pointers it is very likely an incorrect attempt
 reference:
 	I used my older brother as a reference
 	http://www.cplusplus.com/forum/beginner/66234/ 
