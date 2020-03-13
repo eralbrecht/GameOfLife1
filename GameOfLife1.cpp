@@ -9,35 +9,8 @@
 #include "Mirror.h"
 //include other game modes
 using namespace std;
-int main()
+char** worldGeneration(char inputChoice, char outputMode, ofstream outputfile, int columns, int rows)
 {
-	int columns;
-	int rows;
-	int repeat;
-	int generation = 1;
-	//add in game type options
-	cout << "what game version would you like to play?" << endl;
-	cout << "options include donut, mirror, or classic" << endl;
-	cout << "please enter 'd' 'm' or 'c'" << endl;
-	char gameMode;
-	cin >> gameMode;
-	cout << "would you like to print to console or a text file enter c or txt?" << endl;
-	string outputMode;
-	cin >> outputMode;
-	//initiate the file for if we decide we want to print to it
-	ofstream outputfile;
-	outputfile.open("rosealbrechtoutput.txt", ios::out | ios::app);
-	if (outputMode == "txt")
-	{
-		outputfile << "RoseAlbrecht 2300456" << endl;
-		outputfile << "Game Of Life" << endl;
-		outputfile << "Starting Game Board" << endl;
-	}
-	cout << "would you like to provide a map file" << endl;
-	cout << "for a map of the world in which the" << endl;
-	cout << "simulation would occur? y or n" << endl;
-	char inputChoice;
-	cin >> inputChoice;
 	if (inputChoice == 'y')
 	{
 		cout << " - 39 -";
@@ -49,7 +22,7 @@ int main()
 		cout << "empty cells as '-' living cells as 'X' with no other charachters present" << endl;
 		cout << "each row of cells should be a new line in the input file" << endl;
 		cin >> fileName;
-		if (outputMode == "c")
+		if (outputMode == 'c')
 		{
 			cout << " - 50 -";
 			cout << "RoseAlbrecht 2300456" << endl;
@@ -105,26 +78,27 @@ int main()
 			{
 				world[w][h] = worldString[tempPosition];
 				tempPosition += 1;
-				if (outputMode == "c");
+				if (outputMode == 'c');
 				{
 					cout << world[w][h] << '\0';
 				}
-				if (outputMode == "txt");
+				if (outputMode == 't');
 				{
 					outputfile << world[w][h];
 				}
 
 			}
-			if (outputMode == "c");
+			if (outputMode == 'c');
 			{
 				cout << endl;
 			}
-			if (outputMode == "txt");
+			if (outputMode == 't');
 			{
 				outputfile << endl;
 			}
 
 		}
+		return (char**)world;//force it to be a char** instead of default
 		//read the file enough to get height and width
 		//implament something here to input the file and use it and a array method to make the necessary 2D array
 	}
@@ -158,35 +132,68 @@ int main()
 				{
 					world[w][h] = '-';
 				}
-				if (outputMode == "c");
+				if (outputMode == 'c');
 				{
 					cout << world[w][h] << '\0';
 				}
-				if (outputMode == "txt");
+				if (outputMode == 't');
 				{
 					outputfile << world[w][h];
 				}
 			}
-			if (outputMode == "c");
+			if (outputMode == 'c');
 			{
 				cout << endl;
 			}
-			if (outputMode == "txt");
+			if (outputMode == 't');
 			{
 				outputfile << endl;
 			}
 		}
+		return (char**)world;
 	}
+}
+int main()
+{
+	int columns = 0;
+	int rows = 0;
+	int repeat;
+	int generation = 1;
+
+	//add in game type options
+	cout << "what game version would you like to play?" << endl;
+	cout << "options include donut, mirror, or classic" << endl;
+	cout << "please enter 'd' 'm' or 'c'" << endl;
+	char gameMode;
+	cin >> gameMode;
+	cout << "would you like to print to console or a text file enter c or t?" << endl;
+	char outputMode;
+	cin >> outputMode;
+	//initiate the file for if we decide we want to print to it
+	ofstream outputfile;
+	outputfile.open("rosealbrechtoutput.txt", ios::out | ios::app);
+	if (outputMode == 't')
+	{
+		outputfile << "RoseAlbrecht 2300456" << endl;
+		outputfile << "Game Of Life" << endl;
+		outputfile << "Starting Game Board" << endl;
+	}
+	cout << "would you like to provide a map file" << endl;
+	cout << "for a map of the world in which the" << endl;
+	cout << "simulation would occur? y or n" << endl;
+	char inputChoice;
+	cin >> inputChoice;
+	char** world = worldGeneration(inputChoice, outputMode, outputfile, columns, rows);
 	if (gameMode == 'c')
 	{
-		Classic classicGame;
+		Classic classicGame = Classic();
 		while (true)
 		{
-			char newWorld[columns][rows] = classicGame.editCells(world[], columns, rows);
+			char** newWorld = classicGame.editCells(world, columns, rows);
 			//print newWorld
 			cout << "generation # " << generation << endl;
 			generation += 1;
-			Sleep(100);//http://www.cplusplus.com/forum/beginner/14954/
+			//Sleep(100);//http://www.cplusplus.com/forum/beginner/14954/
 			for (int h = 1; h <= rows; h++)
 			{
 				for (int w = 1; w <= columns; w++)
@@ -195,26 +202,26 @@ int main()
 					{
 						newWorld[w][h] = '-';
 					}
-					if (outputMode == "c");
+					if (outputMode == 'c');
 					{
 						cout << newWorld[w][h] << '\0';
 					}
-					if (outputMode == "txt");
+					if (outputMode == 't');
 					{
 						outputfile << newWorld[w][h];
 					}
 				}
-				if (outputMode == "c");
+				if (outputMode == 'c');
 				{
 					cout << endl;
 				}
-				if (outputMode == "txt");
+				if (outputMode == 't');
 				{
 					outputfile << endl;
 				}
 			}
 			//shift worlds
-			if (newWorld == world || newWorld == archiveWorld)
+			if ((char**)newWorld == world || (char**)newWorld == archiveWorld)
 			{ 
 				repeat += 1;
 			}
@@ -246,20 +253,20 @@ int main()
 					{
 						newWorld[w][h] = '-';
 					}
-					if (outputMode == "c");
+					if (outputMode == 'c');
 					{
 						cout << newWorld[w][h] << '\0';
 					}
-					if (outputMode == "txt");
+					if (outputMode == 't');
 					{
 						outputfile << newWorld[w][h];
 					}
 				}
-				if (outputMode == "c");
+				if (outputMode == 'c');
 				{
 					cout << endl;
 				}
-				if (outputMode == "txt");
+				if (outputMode == 't');
 				{
 					outputfile << endl;
 				}
@@ -297,20 +304,20 @@ int main()
 					{
 						newWorld[w][h] = '-';
 					}
-					if (outputMode == "c");
+					if (outputMode == 'c');
 					{
 						cout << newWorld[w][h] << '\0';
 					}
-					if (outputMode == "txt");
+					if (outputMode == 't');
 					{
 						outputfile << newWorld[w][h];
 					}
 				}
-				if (outputMode == "c");
+				if (outputMode == 'c');
 				{
 					cout << endl;
 				}
-				if (outputMode == "txt");
+				if (outputMode == 't');
 				{
 					outputfile << endl;
 				}

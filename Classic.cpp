@@ -6,6 +6,7 @@
 using namespace std;
 Classic::Classic()
 {
+	
 	//maybe have a method that would get rows and columns
 	//need to allocate object
 	//int columns;
@@ -19,14 +20,14 @@ Classic::~Classic()
 {
 	//nothing here
 }
-char editCells(char world[], int c, int r)
+char** editCells(char **world, int c, int r)
 {
 	char newWorld[c][r];
 	for (int i = 0; i < (c*r); ++i)
 	{
 		int nCount = 0;
 		int lineCount = (i / c);
-		columnCount = i % r;
+		int columnCount = i % r;
 		//top row
 		if (lineCount == 0)
 		{
@@ -258,5 +259,5 @@ char editCells(char world[], int c, int r)
 			newWorld[columnCount][lineCount] = 'X';
 		}
 	}
-	return newWorld[];
+	return (char**)newWorld;
 }

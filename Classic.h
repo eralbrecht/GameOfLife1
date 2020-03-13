@@ -19,7 +19,7 @@ public:
 	int r;
 	Classic();
 	~Classic();
-	char editCells(char world[][], int c, int r);
+	char editCells(char **world, int c, int r);
 	//all the methods in C
 }; 
 #endif
