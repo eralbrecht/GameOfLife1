@@ -10,6 +10,8 @@ private:
 
 	//all the variables that we only use here
 public:
+	Classic();
+	~Classic();
 	int columns;
 	int rows;
 	int lineCount;
@@ -17,8 +19,6 @@ public:
 	char newWorld;
 	int c;
 	int r;
-	Classic();
-	~Classic();
 	char editCells(char **world, int c, int r);
 	//all the methods in C
 }; 

@@ -16,14 +16,14 @@ void printer(char text, int header)
 	if (header == 0)
 	{
 
-		outputfile << "RoseAlbrecht 2300456" << endl;
-		outputfile << "Game Of Life" << endl;
-		outputfile << "Starting Game Board" << endl;
+		outputFile << "RoseAlbrecht 2300456" << endl;
+		outputFile << "Game Of Life" << endl;
+		outputFile << "Starting Game Board" << endl;
 		header = -1;
 	}
 
 }
-char** worldGeneration(char inputChoice, char outputMode, int columns, int rows)
+char** worldGeneration(char inputChoice, char outputMode, int columns, int rows, int header)
 {
 	//ofstream outputFile;
 	//char** printFile = tellp(outputFile)
@@ -99,7 +99,7 @@ char** worldGeneration(char inputChoice, char outputMode, int columns, int rows)
 				}
 				if (outputMode == 't');
 				{
-					printer(newWorld[w][h], header);
+					printer(world[w][h], header);
 				}
 
 			}
@@ -153,7 +153,7 @@ char** worldGeneration(char inputChoice, char outputMode, int columns, int rows)
 				}
 				if (outputMode == 't');
 				{
-					printer(newWorld[w][h], header);
+					printer(world[w][h], header);
 				}
 			}
 			if (outputMode == 'c');
@@ -192,15 +192,17 @@ int main()
 	cin >> inputChoice;
 	char** newWorld[columns][rows];
 	char** archiveWorld[columns][rows];
-	char** world = worldGeneration(inputChoice, outputMode, columns, rows);
+	char** world = worldGeneration(inputChoice, outputMode, columns, rows, header);
 	if (gameMode == 'c')
 	{
 		Classic classicGame = Classic();
 		while (true)
 		{
-			char** newWorld = classicGame.editCells(world, columns, rows);
+			//char** 
+			newWorld = classicGame.editCells(world, columns, rows);
 			//print newWorld
 			cout << "generation # " << generation << endl;
+			//need to add print location
 			generation += 1;
 			//Sleep(100);//http://www.cplusplus.com/forum/beginner/14954/
 			for (int h = 1; h <= rows; h++)

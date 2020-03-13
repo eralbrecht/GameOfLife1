@@ -28,8 +28,8 @@ char editCells(char world[], int c, int r)
 	for (int i = 0; i < (c*r); ++i)
 	{
 		int nCount = 0;
-		lineCount = (i / c);
-		columnCount = i % r;
+		int lineCount = (i / c);
+		int columnCount = i % r;
 		//top row
 		if (lineCount == 0)
 		{

@@ -23,7 +23,7 @@ Classic::~Classic()
 char** editCells(char **world, int c, int r)
 {
 	char newWorld[c][r];
-	for (int i = 0; i < (c*r); ++i)
+	for (int i = 0; i < (c * r); ++i)
 	{
 		int nCount = 0;
 		int lineCount = (i / c);
@@ -259,5 +259,5 @@ char** editCells(char **world, int c, int r)
 			newWorld[columnCount][lineCount] = 'X';
 		}
 	}
-	return (char**)newWorld;
+	return (char**) newWorld;
 }
